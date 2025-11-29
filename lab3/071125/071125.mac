@@ -1,0 +1,13 @@
+ENKUCUK MACRO dizi, n
+        LOCAL L1, don
+        XOR SI, SI
+        MOV CX, n
+        MOV AL, dizi[SI]
+        DEC CX
+        INC SI
+L1:     CMP AL, dizi[SI]
+        JL don
+        MOV AL, dizi[SI]
+don:    INC SI
+        LOOP L1
+        ENDM

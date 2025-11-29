@@ -1,0 +1,59 @@
+            PUBLIC IS_PRIME
+mycode      SEGMENT PARA 'CODE'
+            ASSUME CS:mycode
+IS_PRIME    PROC FAR
+            PUSH CX
+
+            XOR BX, BX
+            
+            MOV CX, 2
+            CMP DX, CX    ;YÜKSEK KISIM 0 DEĞİLSE 2DEN KÜÇÜK EŞİT DEĞİLDİR
+            JNZ NOT_LESS_THAN_TWO
+
+            CMP AX, BX
+            JB NOT_PRIME
+
+            CMP AX, BX
+            JE PRIME
+
+NOT_LESS_THAN_TWO:
+
+            CMP DX, BX
+            JB NOT_OVERFLOW_DIV
+
+            PUSH DX
+            PUSH AX
+            PUSH AX
+            MOV AX, DX
+            XOR DX, DX
+            DIV BX
+            POP AX
+            DIV BX
+            MOV CX, DX
+            POP AX
+            POP DX
+            JMP DONE_DIV
+
+NOT_OVERFLOW_DIV:
+            DIV BX
+            MOV CX, DX
+
+DONE_DIV:   CMP CX, 0
+            JZ PRIME
+
+
+            
+
+
+
+
+           
+NOT_PRIME:  ; ASAL FLAG SIFIR KALIR           
+PRIME:      INC CX ; ASAL FLAG SET OLUR
+            
+            MOV AX, CX
+            POP CX
+            RETF
+IS_PRIME    ENDP
+mycode      ENDS
+            END
