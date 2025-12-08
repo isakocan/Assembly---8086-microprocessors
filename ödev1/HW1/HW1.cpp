@@ -17,7 +17,17 @@ void matmul_c(const int* A,
     int A_cols,
     int B_cols)
 {
-    // BURAYA YAZINIZ!
+    int i, j, k, sum;
+    for (i = 0; i < A_rows; i++) {
+        for (j = 0;j < B_cols;j++) {
+            sum = 0;
+            for (k = 0;k < A_cols;k++) {
+                sum += A[i*A_cols+k] * B[k*B_cols+j];
+            }
+            C[i * B_cols + j] = sum;
+        }
+    }
+
 }
 
 void print_matrix(const char* name,
